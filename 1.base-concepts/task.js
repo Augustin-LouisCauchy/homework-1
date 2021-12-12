@@ -1,3 +1,5 @@
+"use strict" 
+
 function solveEquation(a, b, c) {
   let arr;
    
@@ -13,28 +15,39 @@ function solveEquation(a, b, c) {
   
   } 
   
-  /*let arr = b**2 - 4 * a * c;
-  let dis = []
-  let x2 = (-b - Math.sqrt(arr)) / (2 * a);
-  let x1 = (-b + Math.sqrt(arr)) / (2 * a);
-  let x = -b / (2 * a);
-  if (arr > 0) {
-    console.log(`Дискриминант равен: ${dis.push(x1)}`);
-    console.log(`Дискриминант равен: ${dis.push(x2)}`);
-  } else if (arr == 0) {
-    console.log(`Дискриминант равен: ${dis.push(x)}`);
-  } else {
-    console.log(`Корней не найдено ${dis}`);
-  } */
-
   return arr; // array
 }
 
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
+  //Проверка на корректность введения данных
+  if (percent > 0) {
+    percent = + percent;
+  } else if (percent != 0 || percent == 0) {
+    return (`Параметр "Процентная ставка" содержит неправильное значение ${percent}`)
+  }
+  if (contribution > 0) {
+    contribution = + contribution
+  } else if (contribution != 0 ) {
+    return (`Параметр "Первоначальный взнос" содержит неправильное значение ${contribution}`)
+  }
+  if (amount > 0) {
+    amount = + amount
+  } else if (amount != 0 ) {
+    return (`Параметр "Стоимость" содержит неправильное значение ${amount}`)
+  }
 
-  // код для задачи №2 писать здесь
-  //НЕМНОГО НЕ УСПЕВАЮ СО ВТОРОЙ ЗАДАЧЕЙ
-  return totalAmount;
+  let currentDate  = new Date();  
+   date = new Date(window.date.value); 
+   let payPeriod = 0 - ((currentDate.getFullYear() -  date.getFullYear()) * 12) - (currentDate.getMonth() - date.getMonth());
+   date = payPeriod; 
+   let returnAmount = amount - contribution  
+   percent = percent / 1200; 
+   let monthlyPay = amount*(percent+percent/(((1+percent)**date)-1)); 
+   totalAmount = monthlyPay * date;   
+   console.log(totalAmount.toFixed(2));
+   return totalAmount.toFixed(2); 
 }
+
+calculateTotalMortgage();
