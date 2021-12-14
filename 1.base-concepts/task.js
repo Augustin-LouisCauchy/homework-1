@@ -38,16 +38,19 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     return (`Параметр "Стоимость" содержит неправильное значение ${amount}`)
   }
 
-  let currentDate  = new Date();  
-   date = new Date(window.date.value); 
-   let payPeriod = 0 - ((currentDate.getFullYear() -  date.getFullYear()) * 12) - (currentDate.getMonth() - date.getMonth());
-   date = payPeriod; 
-   let returnAmount = amount - contribution  
-   percent = percent / 1200; 
-   let monthlyPay = amount*(percent+percent/(((1+percent)**date)-1)); 
-   totalAmount = monthlyPay * date;   
-   console.log(totalAmount.toFixed(2));
-   return totalAmount.toFixed(2); 
+  let currentTime = new Date();
+  let finishTime = new Date(date);
+  let time = finishTime - currentTime;
+  let expiry = finishTime.getTime() - currentTime.getTime();
+  let loanTermDays = expiry / 8.64e7;
+  let loanTermMonths = loanTermDays / 30
+  let loanTerm = Math.floor(loanTermMonths);
+  let loan = amount - contribution;
+  let monthPayment = loan * (percent + (percent / (((1 + percent)**loanTerm) - 1)));
+  let fullPayment = monthPayment * loanTermMonths;
+  totalAmount = fullPayment.toFixed(2);
+
+  return parseFloat(totalAmount);
 }
 
 calculateTotalMortgage();
