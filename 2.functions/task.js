@@ -1,11 +1,30 @@
+"use strict"
+
 // Задание 1
 function getArrayParams(arr) {
-  let min, max, sum, avg;
+  let avg;
+  let min = Infinity;
+  let max = -Infinity;
+  let sum = 0;
 
-  // Ваш код
+  for (let e = 0; e < arr.length; e++) {
+    if (arr[e] > max) {
+      max = arr[e];
+    } else if (arr[e] < min) {
+      min = arr[e];
+    } else if (e < arr.length) {
+      sum += arr[e]
+    } 
+  }
+  
+  let avg2 = sum / arr.length;
+  avg = Number(avg2);
+  avg.toFixed(2);
 
   return { min: min, max: max, avg: avg };
 }
+
+console.log(getArrayParams([-99, 99, 10])); 
 
 // Задание 2
 function worker(arr) {
