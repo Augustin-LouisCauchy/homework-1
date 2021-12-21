@@ -1,4 +1,4 @@
-"use strict"
+  "use strict"
 
 // Задание 1
 function getArrayParams(arr) {
@@ -10,16 +10,15 @@ function getArrayParams(arr) {
   for (let e = 0; e < arr.length; e++) {
     if (arr[e] > max) {
       max = arr[e];
-    } else if (arr[e] < min) {
+    } if (arr[e] < min) {
       min = arr[e];
-    } else if (e < arr.length) {
+    } if (e < arr.length) {
       sum += arr[e]
     } 
   }
   
-  let avg2 = sum / arr.length;
-  avg = Number(avg2);
-  avg.toFixed(2);
+  let average = sum / arr.length;
+  avg = Number(average.toFixed(2));
 
   return { min: min, max: max, avg: avg };
 }
@@ -58,5 +57,17 @@ makeWork();
 
 // Задание 3
 function worker2(arr) {
-  // Ваш код
+  let max = -Infinity;
+  let min = Infinity;
+
+  for (let j = 0; j < arr.length; j++) {
+    if (arr[j] < min) {
+      min = arr[j];
+    }
+    if (arr[j] > max) {
+      max = arr[j];
+    }
+  }
+  return Math.abs(max - min);
 }
+worker2();
