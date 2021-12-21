@@ -21,36 +21,50 @@ function solveEquation(a, b, c) {
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
-  //Проверка на корректность введения данных
-  if (percent > 0) {
-    percent = + percent;
-  } else if (percent != 0 || percent == 0) {
-    return (`Параметр "Процентная ставка" содержит неправильное значение ${percent}`)
+  
+  if (!isNaN(parseInt(percent)) && parseInt(percent) >= 0) {
+    percent = Number(percent);
+  } else {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`
   }
-  if (contribution > 0) {
-    contribution = + contribution
-  } else if (contribution != 0 ) {
-    return (`Параметр "Первоначальный взнос" содержит неправильное значение ${contribution}`)
-  }
-  if (amount > 0) {
-    amount = + amount
-  } else if (amount != 0 ) {
-    return (`Параметр "Стоимость" содержит неправильное значение ${amount}`)
+  console.log(typeof percent);
+
+  if (!isNaN(parseInt(contribution)) && parseInt(contribution) >= 0) {
+    contribution = Number(contribution);
+  } else {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${contribution}"`
   }
 
-  let currentTime = new Date();
-  let finishTime = new Date(date);
-  let time = finishTime - currentTime;
-  let expiry = finishTime.getTime() - currentTime.getTime();
-  let loanTermDays = expiry / 8.64e7;
-  let loanTermMonths = loanTermDays / 30
-  let loanTerm = Math.floor(loanTermMonths);
+  if (!isNaN(parseInt(amount)) && parseInt(amount) >= 0) {
+    amount = Number(amount);
+  } else {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`
+  }
+
+  let futureTense = new Date(date);
+  let futureMonth = new Date().getMonth(date);
+
+  let percentage = percent / 100 / 12;
+  //console.log(typeof percentage);
+
+  let currentTense = new Date();
+  console.log (currentTense);
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  let diffYears = futureTense.getFullYear() - currentYear;
+  //console.log(diffYears);
+  let diffMonth = diffYears * 12 - (currentMonth + 1) + (futureMonth + 1);
+
   let loan = amount - contribution;
-  let monthPayment = loan * (percent + (percent / (((1 + percent)**loanTerm) - 1)));
-  let fullPayment = monthPayment * loanTermMonths;
-  totalAmount = fullPayment.toFixed(2);
-
-  return parseFloat(totalAmount);
+  let monthPayment = loan * (percentage + percentage / ((1 + percentage)**diffMonth - 1));
+  let fullPayment = (monthPayment * diffMonth).toFixed(2);
+  
+  totalAmount = parseFloat(fullPayment);
+  console.log(totalAmount);
+  
+  return totalAmount;
 }
 
 calculateTotalMortgage();
