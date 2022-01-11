@@ -49,3 +49,4 @@ Student.prototype.exclude = function (reason) {
   delete this.marks;
   this.exclude = reason;
 }
+// НЕ ПОНИМАЮ ПОЧЕМУ ПРИ ИСКЛЮЧЕНИИ(СТУДЕНТА) ВЫДАЁТ ОШИБКУ В ПОСЛЕДНЕМ ТЕСТЕ 
