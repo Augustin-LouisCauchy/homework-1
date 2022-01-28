@@ -1,27 +1,23 @@
-function parseCount (parseNumber) {
-   const number = parseInt(parseNumber);
+// TASK 1______________________________________________________
+
+function parseCount(parseNumber) {
+  const number = Number.parseInt(parseNumber);
   if (isNaN(number)) {
     throw new Error("Невалидное значение");
-    
   }
   return number;
 }
 
-
-
-function validateCount (parseValue) {
-    try {
-        
-        return parseCount(parseValue)
+function validateCount(parseValue) {
+  try {
+    return parseCount(parseValue);
+  } catch (error) {
+    if (error.name == "Error") {
+      return error;
+    } else {
+      throw error;
     }
-    catch (error) {
-        if (error.name == "Error") {
-            return error;
-        }
-        else {
-            throw error;
-        }
-    }
+  }
+}
 
-} 
-
+// TASK 2______________________________________________________
