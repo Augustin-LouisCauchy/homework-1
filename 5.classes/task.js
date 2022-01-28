@@ -1,4 +1,4 @@
-//TASK 1 ____________________________________________________________________
+// TASK 1 ____________________________________________________________________
 
 class PrintEditionItem {
   constructor(name, releaseDate, pagesCount) {
@@ -70,7 +70,7 @@ class DetectiveBook extends Book {
   }
 }
 
-//TASK 2_____________________________________________________________________
+// TASK 2_____________________________________________________________________
 
 class Library {
   constructor(name) {
@@ -116,4 +116,6 @@ const firstBook = library.giveBookByName('Типовой школьный жур
 console.log(firstBook.name)
 const secondBook = library.giveBookByName('Судовой журнал');
 console.log(secondBook)
+
+// TASK 3_____________________________________________________________________
 
